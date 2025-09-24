@@ -27,13 +27,7 @@ with st.sidebar:
     # 3. select language
     language = st.text_input("Language")
 
-    # 4. select voice
-    voice = st.selectbox(
-        "Select Audio",
-        ("Zephyr", "Fenrir", "Callirrhoe", "Erinome")
-    )
-
-    # 5. button to generate the story
+    # 4. button to generate the story
     generate_button = st.button("Generate Story", type='primary')
 
 
@@ -72,6 +66,6 @@ if generate_button:
 
             st.subheader("Listen to your Story:")
 
-            audio = generate_audio(story, voice)
+            audio = generate_audio(story)
             st.audio(audio, format='audio/mp3')
 

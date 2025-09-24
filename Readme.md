@@ -17,13 +17,6 @@ Upload 1–10 images, choose a story style, language, and voice — and let AI c
 
 ---
 
-## 🚀 Demo
-
-![Demo Screenshot](demo.png)
-*(Add your app screenshot here)*
-
----
-
 ## 🛠️ Installation
 
 ### 1. Clone the repository
@@ -125,3 +118,4 @@ Contributions are welcome! Feel free to open issues and submit PRs.
 ## 👨‍💻 Author
 
 * Developed by Mohd Maaz
+

@@ -131,5 +131,3 @@ def generate_audio(story: str) -> BytesIO:
         return audio_fp  # return BytesIO for streaming
     except Exception as e:
         raise RuntimeError(f"gTTS failed with language='{lang_code}': {e}")
-
-

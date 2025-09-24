@@ -3,4 +3,3 @@ wave
 Pillow
 streamlit
 python-dotenv
-io

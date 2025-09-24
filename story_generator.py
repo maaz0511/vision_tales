@@ -3,6 +3,8 @@ from google.genai import types
 from dotenv import load_dotenv
 import os
 import wave
+from gtts import gTTS
+from io import BytesIO
 import io
 
 
@@ -104,56 +106,28 @@ def generate_story_from_images(images_list, story_style:str, story_language:str)
 
     return response.text
 
-# 5. create a wav function
-def wave_file(pcm, channels=1, rate=24000, sample_width=2) -> bytes:
-    buffer = io.BytesIO()
-    with wave.open(buffer, "wb") as wf:
-        wf.setnchannels(channels)
-        wf.setsampwidth(sample_width)
-        wf.setframerate(rate)
-        wf.writeframes(pcm)
-    buffer.seek(0)
-    return buffer.read() 
-
-# 6. create a function to generate audio of the story
-def generate_audio(story:str, voice:str)->bytes:
+# 5. create a function to generate audio of the story
+def generate_audio(story: str) -> BytesIO:
     """
-    Generate an audio narration of a story using a text-to-speech model.
-
-    This function sends the input story text to the Gemini TTS model,
-    configured with the specified voice. The model generates an audio
-    version of the story in MP3 format and returns it as raw bytes.
-
-    Args:
-        story (str): The story text to be converted into speech.
-        voice (str): The name of the prebuilt voice to use for narration.
-
-    Returns:
-        bytes: The generated audio data in MP3 format, represented as raw
-        binary data. This can be saved to a file, streamed, or played 
-        directly in applications like Streamlit using `st.audio`.
+    Generate speech audio from text using gTTS.
+    Detects the story's language via Gemini and returns the audio as an in-memory MP3 buffer.
     """
-
     response = client.models.generate_content(
-        model = "gemini-2.5-flash-preview-tts",
-        contents= story,
-        
-        config= types.GenerateContentConfig(
-            response_modalities=["AUDIO"],
-            
-            speech_config=types.SpeechConfig(
-                voice_config= types.VoiceConfig(
-                    prebuilt_voice_config= types.PrebuiltVoiceConfig(
-                        voice_name=voice
-                    )
-                )
-            )
-        )
+        model="gemini-2.5-flash-lite",
+        contents=f"Return ONLY the ISO 639-1 language code (like 'en', 'fr', 'es') for this text: {story}"
     )
 
-    data = response.candidates[0].content.parts[0].inline_data.data
-    return wave_file(data)
+    # Extract language code safely
+    lang_code = response.candidates[0].content.parts[0].text.strip().lower()
 
-   
+    # Sanitize possible extra characters (e.g., quotes)
+    lang_code = lang_code.replace("'", "").replace('"', '')
 
-
+    try:
+        tts = gTTS(text=story, lang="en", slow=False)
+        audio_fp = BytesIO()
+        tts.write_to_fp(audio_fp)
+        audio_fp.seek(0)
+        return audio_fp  # return BytesIO for streaming
+    except Exception as e:
+        raise RuntimeError(f"gTTS failed with language='{lang_code}': {e}")

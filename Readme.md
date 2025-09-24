@@ -3,7 +3,7 @@
 **Where your pictures come alive as stories.**
 
 VisionTales is an AI-powered storytelling web app built with **Streamlit**.
-Upload 1–10 images, choose a story style, language, and voice — and let AI craft a unique narrative and narrate it back to you.
+Upload 1–10 images, choose a story style and language — and let AI craft a unique narrative and narrate it back to you.
 
 ---
 
@@ -12,8 +12,15 @@ Upload 1–10 images, choose a story style, language, and voice — and let AI c
 * 📸 **Image to Story** – Upload up to 10 images and generate a connected narrative.
 * 🎭 **Story Styles** – Comedy, Thriller, Fairy Tale, Sci-Fi, Mystery, Adventure, and Morale.
 * 🌍 **Language Support** – Generate stories in any supported language (e.g., English, Hindi, Tamil).
-* 🗣️ **Narration** – Listen to your story with AI-generated voices (Zephyr, Fenrir, Callirrhoe, Erinome).
-* ⚡ **Powered by Google Gemini** – Uses Google’s generative AI for text and speech.
+* 🗣️ **Narration** – Listen to your story with AI-generated audio (powered by gTTS).
+* ⚡ **Powered by Google Gemini** – Uses Google’s generative AI for text understanding and story generation.
+
+---
+
+## 🚀 Demo
+
+![Demo Screenshot](demo.png)
+*(Add your app screenshot here)*
 
 ---
 
@@ -71,7 +78,8 @@ visiontales/
 ## ⚙️ Tech Stack
 
 * [Streamlit](https://streamlit.io/) – Web UI
-* [Google Generative AI](https://ai.google.dev/) – Text & Audio generation
+* [Google Generative AI](https://ai.google.dev/) – Story generation
+* [gTTS](https://pypi.org/project/gTTS/) – Text-to-speech
 * [Pillow](https://pillow.readthedocs.io/) – Image handling
 * [Python dotenv](https://pypi.org/project/python-dotenv/) – Environment management
 
@@ -82,15 +90,15 @@ visiontales/
 1. Upload **1–10 images**.
 2. Select a **story style**.
 3. Enter your **language code** (e.g., `en`, `hi`, `ta`).
-4. Choose a **voice**.
-5. Click **Generate Story** and enjoy!
+4. Click **Generate Story**.
+5. Read the story and listen to the narration (`.mp3` playback in-app).
 
 ---
 
 ## ⚠️ Notes
 
 * API key from **Google AI Studio** is required.
-* Narration output is generated in `.wav` and played via Streamlit audio.
+* Narration output is generated in `.mp3` format and played via Streamlit audio.
 * Max upload size: **10 images**.
 
 ---
@@ -118,4 +126,3 @@ Contributions are welcome! Feel free to open issues and submit PRs.
 ## 👨‍💻 Author
 
 * Developed by Mohd Maaz
-

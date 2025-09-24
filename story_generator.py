@@ -47,29 +47,29 @@ def prompt(story_style:str, story_language:str)->str:
     """
 
     base_prompt = f"""
-    **Your Persona:** You are a friendly and engaging storyteller. Your goal is to tell a story that is fun and easy to read.
-    **Your Main Goal:** Write a story in simple, clear, and modern **'{story_language}'** story_language.
-    **Your Task:** Create one single story that connects all the provided images in order.
-    **Style Requirement:** The story must fit the '{story_style}' genre.
-    **Core Instructions:**
-    1.  **Tell One Single Story:** Connect all images into a narrative with a beginning, middle, and end.
-    2.  **Use Every Image:** Include a key detail from each image.
-    3.  **Creative Interpretation:** Infer the relationships between the images.
-    4.  **Nationality**: Use only Indian Names,Characters, Places , Persona Etc.
-    **Output Format:**
-    -   **Title:** Start with a simple and clear title.
-    -   **Length:** The story must be between 4 and 5 paragraphs.
-    -   **Language:** The output must in **'{story_language}'** story_language.
+    Your Main Goal: Write a story in simple, clear, and modern '{story_language}' story_language.
+    Your Task: Create one single story that connects all the provided images in order.
+    Style Requirement: The story must fit the '{story_style}' genre.
+    Core Instructions:
+    1. Tell One Single Story: Connect all images into a narrative with a beginning, middle, and end.
+    2. Use Every Image: Include a key detail from each image.
+    3. Creative Interpretation: Infer the relationships between the images.
+    4. Nationality: Use only Indian Names, Characters, Places, Persona, etc.
+    Output Format:
+    - Title: Start with a simple and clear title.
+    - Length: The story must be between 4 and 5 paragraphs.
+    - Language: The output must be in '{story_language}' story_language.
+    - Do not include any special character in starting and ending of heading.
     """
 
     # --- Add Style-Specific Instructions ---
     style_instruction = ""
     if story_style == "Morale":
-        style_instruction = "\n**Special Section:** After the story, you MUST add a section starting with the exact tag `[MORAL]:` followed by the single-sentence moral of the story."
+        style_instruction = "\nSpecial Section: After the story, you MUST add a section starting with the exact tag [MORAL]: followed by the single-sentence moral of the story."
     elif story_style == "Mystery":
-        style_instruction = "\n**Special Section:** After the story, you MUST add a section starting with the exact tag `[SOLUTION]:` that reveals the culprit and the key clue."
+        style_instruction = "\nSpecial Section: After the story, you MUST add a section starting with the exact tag [SOLUTION]: that reveals the culprit and the key clue."
     elif story_style == "Thriller":
-        style_instruction = "\n**Special Section:** After the story, you MUST add a section starting with the exact tag `[TWIST]:` that reveals a final, shocking twist."
+        style_instruction = "\nSpecial Section: After the story, you MUST add a section starting with the exact tag [TWIST]: that reveals a final, shocking twist."
 
     return base_prompt + style_instruction
 
@@ -131,4 +131,5 @@ def generate_audio(story: str) -> BytesIO:
         return audio_fp  # return BytesIO for streaming
     except Exception as e:
         raise RuntimeError(f"gTTS failed with language='{lang_code}': {e}")
+
 

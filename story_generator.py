@@ -124,10 +124,11 @@ def generate_audio(story: str) -> BytesIO:
     lang_code = lang_code.replace("'", "").replace('"', '')
 
     try:
-        tts = gTTS(text=story, lang="en", slow=False)
+        tts = gTTS(text=story, lang=lang_code, slow=False)
         audio_fp = BytesIO()
         tts.write_to_fp(audio_fp)
         audio_fp.seek(0)
         return audio_fp  # return BytesIO for streaming
     except Exception as e:
         raise RuntimeError(f"gTTS failed with language='{lang_code}': {e}")
+

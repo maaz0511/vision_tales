@@ -1,0 +1,6 @@
+google-genai
+wave
+Pillow
+streamlit
+python-dotenv
+io

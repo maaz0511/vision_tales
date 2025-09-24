@@ -1,5 +1,5 @@
 google-genai
+gTTS
 Pillow
 streamlit
 python-dotenv
-

@@ -113,7 +113,7 @@ def generate_audio(story: str) -> BytesIO:
     Detects the story's language via Gemini and returns the audio as an in-memory MP3 buffer.
     """
     response = client.models.generate_content(
-        model="gemini-2.5-flash-lite",
+        model="gemini-3.5-flash",
         contents=f"Return ONLY the ISO 639-1 language code (like 'en', 'fr', 'es') for this text: {story}"
     )
 

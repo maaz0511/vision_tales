@@ -100,7 +100,7 @@ def generate_story_from_images(images_list, story_style:str, story_language:str)
     """
      
     response = client.models.generate_content(
-        model = "gemini-3.5-flash-lite",
+        model = "gemini-3.5-flash",
         contents = [*images_list, prompt(story_style, story_language)]
     )
 
